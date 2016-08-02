@@ -1,0 +1,50 @@
+upstream php-upstream {
+    server php:9000;
+}
+
+server {
+    server_name {{ getenv "VIRTUAL_HOST" }};
+    root {{ getenv "DOCUMENT_ROOT" }};
+
+    location / {
+        # try to serve file directly, fallback to app.php
+        try_files $uri /app.php$is_args$args;
+    }
+
+
+    {{ if eq (getenv "APPLICATION_ENV") "development" }}
+        #DEV
+        location ~  ^/(app_dev|config)\.php(/|$){
+            fastcgi_pass php-upstream;
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            include fastcgi_params;
+
+            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            fastcgi_param DOCUMENT_ROOT $realpath_root;
+        }
+    {{ end }}
+
+
+
+    # PROD
+    location ~ ^/app\.php(/|$) {
+        fastcgi_pass php-upstream;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        internal;
+    }
+
+    location ~ \.php$ {
+      return 404;
+    }
+
+    error_log /var/log/nginx/{{ getenv "LOG_FILE" }}_error.log;
+    access_log /var/log/nginx/{{ getenv "LOG_FILE" }}_access.log;
+}
+
+
+
+
