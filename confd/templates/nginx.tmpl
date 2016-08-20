@@ -12,17 +12,17 @@ server {
     }
 
 
-    {{ if eq (getenv "APPLICATION_ENV") "development" }}
-        #DEV
-        location ~  ^/(app_dev|config)\.php(/|$){
-            fastcgi_pass php-upstream;
-            fastcgi_split_path_info ^(.+\.php)(/.*)$;
-            include fastcgi_params;
+{{ if eq (getenv "APPLICATION_ENV") "development" }}
+    #DEV
+    location ~  ^/(app_dev|config)\.php(/|$){
+        fastcgi_pass php-upstream;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
 
-            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-            fastcgi_param DOCUMENT_ROOT $realpath_root;
-        }
-    {{ end }}
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+    }
+{{ end }}
 
 
 
