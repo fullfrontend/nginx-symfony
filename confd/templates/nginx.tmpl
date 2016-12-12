@@ -58,7 +58,7 @@ server {
      return 404;
    }
 
-    error_log /var/log/nginx/{{ getenv "LOG_FILE" }}_error.log;
-    access_log /var/log/nginx/{{ getenv "LOG_FILE" }}_access.log;
+    error_log stderr;
+    access_log /dev/stdout;
 
 }
