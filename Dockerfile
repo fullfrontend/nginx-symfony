@@ -1,5 +1,5 @@
 FROM he8us/nginx:latest
-MAINTAINER Cedric Michaux <cedric@he8us.be>
+MAINTAINER Cedric Michaux <cedric@fullfrontend.eu>
 
 
 COPY confd/ /etc/confd
