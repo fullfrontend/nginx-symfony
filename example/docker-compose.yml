@@ -2,7 +2,7 @@ version: "3"
 
 services:
     php-runner:
-        image: he8us/php-fpm-prod:latest
+        image: he8us/php-fpm:latest
         expose:
             - 9000
         environment:
