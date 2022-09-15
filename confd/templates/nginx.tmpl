@@ -31,7 +31,7 @@ server {
         try_files $uri$webp_suffix $uri =404;
    }
 
-    location ~* .(jpg|jpeg|png|gif|ico|css|js|webp|svg)$ {
+    location ~* .(jpg|jpeg|png|gif|ico|css|js|webp|svg|br)$ {
       expires 60d;
     }
 
