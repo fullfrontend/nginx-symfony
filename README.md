@@ -1,6 +1,8 @@
 # nginx-symfony
 
-A Docker container to run symfony with nginx. This image is meant to run behind a load balancer like [Traefik]
+A Docker container to run Symfony with NGINX, with Brotli and every optimization in mind. This image is meant to run 
+behind a load balancer like 
+[Traefik]
 (https://traefik.io/)
 
 ## How to use this image
