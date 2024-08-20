@@ -13,14 +13,14 @@ This image is made to be used in conjunction with a php-fpm image [like mine]
 I use docker compose to handle my stack so here is my nginx config:
 ```
 nginx:
-    image: he8us/nginx-symfony
+    image: fullfrontend/nginx-symfony
     ports:
         - 80
         
     environment:
         PHP_UPSTREAM: "php-runner:9000"
-        VIRTUAL_HOST: "he8us.dev"
-        DOCUMENT_ROOT: "/var/www/he8us/"
+        VIRTUAL_HOST: "fullfrontend.dev"
+        DOCUMENT_ROOT: "/var/www/fullfrontend/"
 
     volumes_from:
         - application

@@ -2,7 +2,7 @@ version: "3"
 
 services:
     php-runner:
-        image: he8us/php-fpm:latest
+        image: fullfrontend/php-fpm:latest
         expose:
             - 9000
         environment:
@@ -12,7 +12,7 @@ services:
         volumes:
             - ./:/app/www
     nginx:
-        image: he8us/nginx-symfony:latest
+        image: fullfrontend/nginx-symfony:latest
         build:
             context: ..
         ports:
@@ -23,5 +23,5 @@ services:
             - php-runner
         environment:
             PHP_UPSTREAM: "php-runner:9000"
-            VIRTUAL_HOST: "he8us.test"
+            VIRTUAL_HOST: "fullfrontend.test"
             DOCUMENT_ROOT: "/app/www"
